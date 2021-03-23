@@ -1,3 +1,5 @@
+import 'package:peliculas_app/clases/genres.dart';
+
 class Pelis {
   Pelis({
     this.urlImagen,
@@ -17,7 +19,7 @@ class Pelis {
     final duracion = json['runtime'];
     final popularidad = json['popularity'];
     final lenguaje = json['original_language'];
-    final generos = json['genres'];
+    final generos = Genres.fromJson(json['genres']);
 
     return Pelis(
       urlImagen: urlImagen,
@@ -38,7 +40,7 @@ class Pelis {
   final int duracion;
   final double popularidad;
   final String lenguaje;
-  final String generos;
+  final Genres generos;
 }
 
 final json = {
