@@ -1,19 +1,20 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:peliculas_app/clases/pelis.dart';
 
 Future<List<Pelis>> obtenerPelis() async {
   try {
-    Response response = await Dio().get(
-        "https://api.themoviedb.org/3/movie/550?api_key=0e685fd77fb3d76874a3ac26e0db8a4b");
-    if (response.statusCode != 200) {
+    Response respuesta = await Dio().get(
+        "https://api.themoviedb.org/3/trending/all/day?api_key=1a3687f41687ec6075ab5b76373fe38d");
+    if (respuesta.statusCode != 200) {
       throw Error;
     } else {
-      final json = response.data['pelis'];
+      final json = respuesta.data['pelis'];
 
       var listadoDePelis =
           json.map((pelisJson) => Pelis.fromJson(pelisJson)).toList();
 
-      return listadoDePelis;
+      return List<Pelis>.from(listadoDePelis);
     }
   } catch (e) {
     return [];
